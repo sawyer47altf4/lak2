@@ -1,21 +1,42 @@
 import base64
+from cryptography.fernet import Fernet
 
 print("these is a alpha build 0.1")
-# version
-print("i can convert text to base64 right now")
-# make a list on what the program can convert
-choice = input("what do you wnat to use to convert the text :")
-# chose what to convert the text in the store var
-# match case is like if but better soooo yah
-match choice:
-    case "base64":
-        match input("enc or dec:"):
-            case "enc":
-                data = input("text to encypt: ")
-                data = data.encode("utf-8")
-                data = base64.b64encode(data)
-                print(data.decode("utf-8"))
-            case "dec":
-                data = input("base64 to convert back:")
-                data = base64.b64decode(data)
-                print(data.decode("utf-8"))
+
+text = input("text to encrypt: ")
+text = text.encode("utf-8")
+
+def SUPPERSECRET(enc):
+    enc1 = base64.b64encode(enc)
+    print(enc1)
+
+def fernetencryption(texttoplaywith):
+    ask1 = input("enc = 1, dec = 2 :")
+    if ask1 == ("1") or ask1 == ("enc"):
+        key = Fernet.generate_key()
+        safe = Fernet(key)
+        enc = safe.encrypt(texttoplaywith)
+        key = key.decode("utf-8")
+        enc = enc.decode("utf-8")
+        with open("key.txt", "w") as f:
+            f.write(key)
+        print(f"your key is {key} keep it in a safe place") 
+        print(f"your message is {enc}")
+
+    elif ask1 == ("2") or ask1 == ("dec"):
+        loadortype = input("load from key.txt has to in lak2 = 1, type manual = 2 :")
+        if loadortype == ("1") or loadortype == ("load"):
+            with open("key.txt", "r") as f:
+                key = f.read()
+
+        elif loadortype == ("2"):
+            key = input("plese provide key: ")
+        safe = Fernet(key)
+        dec = safe.decrypt(texttoplaywith)
+        dec = dec.decode("utf-8")
+        print(dec)
+    
+print("1, super secret base64 encode only")
+print("2, fernet")
+whatcipher = input("1, 2")
+### add if for code here
