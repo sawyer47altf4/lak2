@@ -39,7 +39,7 @@ def fernetcipher(texttoplaywith):
 
 print("1, super secret base64 encode only")
 print("2, fernet")
-whatcipher = input("1, 2")
+whatcipher = input("plese pick 1 or 2 :")
 if whatcipher == ("1"):
     SUPPERSECRET(text)
 elif whatcipher == ("2"):
