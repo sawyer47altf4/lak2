@@ -1,17 +1,13 @@
 import base64
 from cryptography.fernet import Fernet
+from tkinter import *
 
-print("these is a alpha build 0.3")
+print("these is a alpha build v0.6")
 
-text = input("text to encrypt: ")
-text = text.encode("utf-8")
+#text = input("text to encrypt: ").encode("utf-8")
 
-def SUPPERSECRET(enc):
-    enc1 = base64.b64encode(enc)
-    print(enc1)
-
-def fernetcipher(texttoplaywith):
-    encdec = input("enc = 1, dec = 2 :")
+def fernetcipher(texttoplaywith):   # need to make new function to encrypt text and make key, and make one to decrypt 
+    encdec = input("enc = 1, dec = 2 :")  # get rid of all input(), and try to remove if statments
     if encdec == ("1") or encdec == ("enc"):
         key = Fernet.generate_key()
         safe = Fernet(key)
@@ -36,11 +32,16 @@ def fernetcipher(texttoplaywith):
         dec = dec.decode("utf-8")
         print(dec)
 
+root = Tk()
 
-print("1, super secret base64 encode only")
-print("2, fernet")
-whatcipher = input("plese pick 1 or 2 :")
-if whatcipher == ("1"):
-    SUPPERSECRET(text)
-elif whatcipher == ("2"):
-    fernetcipher(text)
+mainname = Label(root, text="project Lock And Key").grid(row=1, column=1)
+version = Label(root, text="av0.6").grid(row=2, column=1)
+needkey = Label(root, text="input key").grid(row=3, column=1)
+key = Entry(root).grid(row=3, column=2)
+needencodedtext = Label(root, text="input encoded message").grid(row=4, column=1)
+encodetext = Button(root, text="encrypt message").grid(row=1, column=2)
+decodetext = Button(root, text="decode message").grid(row=2, column=2)
+encodedtext = Entry(root).grid(row=4, column=2)
+output = Label(root, text=f"output: ").grid(row=5, column=1)
+
+root.mainloop()
